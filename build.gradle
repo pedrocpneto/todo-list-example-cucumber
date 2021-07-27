@@ -1,6 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.5.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id "org.flywaydb.flyway" version "7.11.4"
 	id 'java'
 }
 
@@ -11,6 +12,10 @@ sourceCompatibility = '11'
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
+	}
+	testCompileOnly {
+		extendsFrom annotationProcessor
+		extendsFrom compileOnly
 	}
 }
 
@@ -28,7 +33,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.flywaydb:flyway-core'
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-	compileOnly 'org.projectlombok:lombok'
+	testCompileOnly  'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
@@ -43,4 +48,10 @@ dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
+}
+
+flyway {
+	url = 'jdbc:h2:mem:testdb'
+	user='sa'
+	password='password'
 }
