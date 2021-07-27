@@ -26,6 +26,7 @@ repositories {
 ext {
 	set('springCloudVersion', "2020.0.3")
 	set('cucumberVersion', '6.10.4')
+	set('mapStructVersion', '1.4.2.Final')
 }
 
 dependencies {
@@ -38,6 +39,8 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
+	compileOnly "org.mapstruct:mapstruct:${mapStructVersion}"
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation "io.cucumber:cucumber-java:${cucumberVersion}"
 	testImplementation "io.cucumber:cucumber-junit:${cucumberVersion}"
