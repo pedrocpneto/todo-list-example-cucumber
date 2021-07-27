@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Value;
 
 public enum Todo {;
-    private interface Id { Long getId(); }
+    public interface Id { Long getId(); }
     public interface Title { String getTitle(); }
     public interface Observation { String getObservation(); }
 
