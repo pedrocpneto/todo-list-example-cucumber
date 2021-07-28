@@ -1,6 +1,7 @@
 # language: pt
 Funcionalidade: Listagem de Tarefas
   Manipulação da listagem de tarefas
+  Permite a consulta, inserção, edição e remoção de tarefas para o usuário
 
   Cenário: Lista de tarefas vazia
     Dado que não há tarefa salva no sistema
