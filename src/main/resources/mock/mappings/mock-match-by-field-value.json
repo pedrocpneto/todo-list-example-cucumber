@@ -4,76 +4,74 @@
       "request": {
         "method": "POST",
         "urlPathPattern": "/boleto",
-        "bodyPatterns" : [ {
-          "matchesJsonPath" : {
-            "expression": "$..partnerAccountCode",
-            "contains": "1"
+        "bodyPatterns": [
+          {
+            "matchesJsonPath": {
+              "expression": "$..partnerAccountCode",
+              "contains": "1"
+            }
           }
-        } ]
+        ]
       },
       "response": {
         "status": 400,
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "body": "[{ \"code\":\"53091\",\"message\":\"O campo “senderHash“ não foi enviado na requisição\" }]"
+        "jsonBody": [
+          {
+            "errorCode": "100"
+          }
+        ]
       }
     },
     {
       "request": {
         "method": "POST",
         "urlPathPattern": "/boleto",
-        "bodyPatterns" : [ {
-          "matchesJsonPath" : {
-            "expression": "$..partnerAccountCode",
-            "contains": "2"
+        "bodyPatterns": [
+          {
+            "matchesJsonPath": {
+              "expression": "$..partnerAccountCode",
+              "contains": "2"
+            }
           }
-        } ]
+        ]
       },
       "response": {
         "status": 400,
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "body": "{\"message\":\"Não foi possível gerar o boleto pois o cliente está com saldo negativo\"}"
+        "jsonBody": [
+          {
+            "errorCode": "200"
+          }
+        ]
       }
     },
     {
       "request": {
         "method": "POST",
         "urlPathPattern": "/boleto",
-        "bodyPatterns" : [ {
-          "matchesJsonPath" : {
-            "expression": "$..partnerAccountCode",
-            "contains": "3"
+        "bodyPatterns": [
+          {
+            "matchesJsonPath": {
+              "expression": "$..partnerAccountCode",
+              "contains": "3"
+            }
           }
-        } ]
-      },
-      "response": {
-        "status": 400,
-        "headers": {
-          "Content-Type": "application/json;charset=UTF-8"
-        },
-        "body": "[{\"code\":\"9999\",\"message\":\"Código não mapeado na nossa base\"}]"
-      }
-    },
-    {
-      "request": {
-        "method": "POST",
-        "urlPathPattern": "/boleto",
-        "bodyPatterns" : [ {
-          "matchesJsonPath" : {
-            "expression": "$..partnerAccountCode",
-            "contains": "4"
-          }
-        } ]
+        ]
       },
       "response": {
         "status": 200,
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "body": "{\"code\":\"9999\",\"paymentLink\":\"www.google.com\", \"barcode\":\"3333\", \"dueDate\":\"2020-09-20\"}"
+        "jsonBody": {
+          "barCode": "{{randomValue length=40 type='NUMERIC'}}"
+        },
+        "transformers": ["response-template"]
       }
     }
   ]
