@@ -1,5 +1,5 @@
 # language: pt
-Funcionalidade: Priorização de Tarefas
+Funcionalidade: Com Outline - Priorização de Tarefas
   Permitir que as tarefas sejam devolvidas de forma priorizada
 
   Delineação do Cenário: Tarefa ordenada com prioridade <prioridade>
