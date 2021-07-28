@@ -1,14 +1,14 @@
 package net.pcpinfo.todolistexemplo.todo;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
+import static lombok.AccessLevel.*;
 
 @Entity(name = "todo")
 @Getter
@@ -20,4 +20,22 @@ public class TodoEntity {
     Long id;
     String title;
     String observation;
+
+    @Column(name = "priority")
+    @Getter(NONE)
+    @Setter(NONE)
+    int priorityValue;
+
+    @Transient
+    PriorityEnum priority;
+
+    @PostLoad
+    void fillTransient() {
+        priority = PriorityEnum.fromValue(priorityValue);
+    }
+
+    @PrePersist
+    void fillPersistent() {
+        priorityValue = priority.value;
+    }
 }

@@ -9,5 +9,6 @@ public interface TodoMapper {
     Todo.Response.Default toDefaultResponse(TodoEntity todo);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "priority", defaultValue = "MEDIUM")
     TodoEntity toEntity(Todo.Request.Create todoCreate);
 }

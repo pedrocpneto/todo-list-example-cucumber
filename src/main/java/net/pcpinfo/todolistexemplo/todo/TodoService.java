@@ -18,7 +18,7 @@ public class TodoService {
     TodoMapper mapper;
 
     public List<Todo.Response.Default> findAll() {
-        return repository.findAll().stream().map(mapper::toDefaultResponse).collect(toList());
+        return repository.findAllByOrderByPriorityValueDesc().stream().map(mapper::toDefaultResponse).collect(toList());
     }
 
     public void create(Todo.Request.Create todoCreate) {
