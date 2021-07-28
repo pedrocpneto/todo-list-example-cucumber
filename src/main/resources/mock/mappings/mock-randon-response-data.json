@@ -1,0 +1,33 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "POST",
+        "urlPathPattern": "/debts"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "amount": "{{jsonPath request.body '$.amount'}}",
+          "code": "{{randomValue type='UUID'}}",
+          "created_at": "{{now timezone='America/Montevideo' format='yyyy-MM-dd HH:mm:ss'}}",
+          "customer_code": "{{jsonPath request.body '$.customer_code'}}",
+          "debit_sources": [ {
+              "debit_source_code": "{{randomValue type='UUID'}}",
+              "debited_amount": "{{jsonPath request.body '$.amount'}}",
+              "status": "initialized",
+              "type": "acquirer_balance"
+            }
+          ],
+          "expires_at": "{{now timezone='America/Montevideo' offset='5 minutes' format='yyyy-MM-dd HH:mm:ss'}}",
+          "reference_code": "{{randomValue type='UUID'}}",
+          "status": "pending"
+        },
+        "transformers": ["response-template"],
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    }
+  ]
+}

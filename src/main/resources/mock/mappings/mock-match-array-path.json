@@ -1,0 +1,36 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "GET",
+        "urlPathPattern": "/zip-code/38400648"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "address": "Rua xxx",
+          "number": 1500
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "urlPathPattern": "/zip-code/\\b(38550000|38000000)\\b"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "address": "Rua bbbb",
+          "number": 1200
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    }
+  ]
+}
