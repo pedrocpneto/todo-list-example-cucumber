@@ -1,6 +1,7 @@
 package net.pcpinfo.todolistexemplo;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.E;
 import io.cucumber.java.pt.Então;
@@ -22,6 +23,11 @@ public class TodoListTest extends SpringIntegrationTest {
     private TodoService todoService;
 
     private List<Todo.Response.Default> todoList;
+
+    @Before
+    public void deleteAllBefore() {
+        todoRepository.deleteAll();
+    }
 
     @Dado("que não há tarefa salva no sistema")
     public void queNãoHáTarefaSalvaNoSistema() {
@@ -54,7 +60,6 @@ public class TodoListTest extends SpringIntegrationTest {
 
     @Dado("que eu tenho as seguintes tarefas inseridas anteriormente:")
     public void queEuTenhoAsSeguintesTarefasInseridasAnteriormente(DataTable dataTable) {
-        todoRepository.deleteAll();
         var tarefas = dataTable.<String, String>asMaps(String.class, String.class);
         for (var tarefa : tarefas) {
             var priority = PriorityEnum.fromName(tarefa.get("prioridade"));
@@ -79,7 +84,7 @@ public class TodoListTest extends SpringIntegrationTest {
 
     @Então("o sistema devolverá uma lista com {int} itens")
     public void oSistemaDevolveráUmaListaComItens(int quantidade) {
-        Assert.isTrue(quantidade == todoList.size(), "todo list deveria ter a quantidade de " + quantidade + " itens");
+        Assert.isTrue(quantidade == todoList.size(), "todo list deveria ter a quantidade de " + quantidade + " itens, porém a quantidade é de " + todoList.size());
     }
 
     @E("na posição {int} está o item com título {string} e observação {string}")
